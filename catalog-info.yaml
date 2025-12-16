@@ -1,0 +1,47 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: hms-tenant-management-service
+  description: hms tenant management service
+  
+  # === ANNOTATIONS: The SDLC Integration ===
+  annotations:
+    # 1. Links to the Git repo (powers CI/CD, Code Coverage, etc.)
+    github.com/project-slug: ruchithaab-byte/hms-tenant-management-service
+    
+    # 2. Test & Secure (SonarQube, Snyk)
+    sonarqube.org/project-key: hms-tenant-management-service
+    # snyk.io/project-ids: '...' # Often provisioned and added later
+    
+    # 3. Deploy (ArgoCD, Kubernetes)
+    argocd/app-name: hms-tenant-management-service
+    backstage.io/kubernetes-id: hms-tenant-management-service
+    
+    # 4. Operate (PagerDuty, Grafana)
+    pagerduty.com/service-id: hms-tenant-management-service # Or an integration key
+    grafana/dashboard-selector: 'app="hms-tenant-management-service"'
+    
+    # 5. Conditional Annotations
+    
+
+spec:
+  type: service
+  lifecycle: experimental
+  owner: group:default/user
+  system: user
+  
+  # === RELATIONSHIPS: The Dependency Graph ===
+  dependsOn:
+    # All services depend on ScaleKit and Postgres
+    - api:default/scalekit
+    - resource:default/postgres-hms-tenant-management-service_db
+
+    
+    
+    
+    
+    
+    
+  consumesApi:
+    - api:default/scalekit
+
